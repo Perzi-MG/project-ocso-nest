@@ -30,6 +30,7 @@ export class ProductsService {
     }
   ];
   create(createProductDto: CreateProductDto) {
+    if(!createProductDto.productId) createProductDto.productId = uuid();
     createProductDto.productId = uuid();
     this.products.push(createProductDto);
     return createProductDto;
@@ -52,18 +53,18 @@ export class ProductsService {
   }
 
   update(id: string, updateProductDto: UpdateProductDto) {
-    let productToUpdate = this.findOne(id);
-    productToUpdate = {
-      ...productToUpdate,
-      ...updateProductDto
-    };
-    this.products = this.products.map((product) => {
-      if(product.productId === id){
-        product = productToUpdate;
+    let product = this.findOne(id);
+    this.products = this.products.map((product) =>{
+      if(product.productId === id) return{
+        ...product,
+        ...updateProductDto
       }
-      return productToUpdate;
-    });
-    return productToUpdate;
+      return product;
+    })
+    return{
+      ...product,
+      ...updateProductDto,
+    }
   }
 
   remove(id: string) {
