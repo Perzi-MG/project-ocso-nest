@@ -4,19 +4,27 @@ import { Location } from "src/locations/entities/location.entity";
 
 
 export class CreateEmployeeDto{
-    @ApiProperty()
+    @ApiProperty({
+        default: "Miguel"
+    })
     @IsString()
     @MaxLength(30)
     employeeName: string;
-    @ApiProperty()
+    @ApiProperty({
+        default: "Garcia"
+    })
     @IsString()
     @MaxLength(70)
     employeeLastName: string;
-    @ApiProperty()
+    @ApiProperty({
+        default: "4641712221"
+    })
     @IsString()
     @MaxLength(10)
     employeePhoneNumber: string;
-    @ApiProperty()
+    @ApiProperty({
+        default: "mgarciammej@gmail.com"
+    })
     @IsString()
     @IsEmail()
     employeeEmail: string;
