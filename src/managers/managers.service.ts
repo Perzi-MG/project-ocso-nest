@@ -12,7 +12,8 @@ export class ManagersService {
     private managerRepository: Repository<Manager>
   ){}
   create(createManagerDto: CreateManagerDto) {
-    return this.managerRepository.save(createManagerDto);
+    const manager = this.managerRepository.save(createManagerDto)
+    return manager
   }
 
   findAll() {

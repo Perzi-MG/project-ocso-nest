@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
-import { v4 as uuid } from 'uuid';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Employee } from './entities/employee.entity';
@@ -19,6 +18,14 @@ export class EmployeesService {
 
   findAll() {
     return this.employeeRepository.find();
+  }
+
+  findByLocation(id: number){
+    return this.employeeRepository.findBy({
+      location:{
+        locationId: id
+      }
+    })
   }
 
   findOne(id: string) {
