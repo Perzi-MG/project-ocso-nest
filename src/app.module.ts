@@ -10,9 +10,18 @@ import { ManagersModule } from './managers/managers.module';
 import { LocationsModule } from './locations/locations.module';
 import { RegionsModule } from './regions/regions.module';
 import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
+import { EXPIRES_IN, JWT_KEY } from './auth/constants/jwt.constants';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [
+    JwtModule.register({
+      secret: JWT_KEY,
+      signOptions: {
+        expiresIn: EXPIRES_IN
+      },
+    }),
+    TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.host,
       port: 5432,
