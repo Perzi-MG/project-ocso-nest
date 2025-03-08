@@ -9,6 +9,7 @@ import { ProvidersModule } from './providers/providers.module';
 import { ManagersModule } from './managers/managers.module';
 import { LocationsModule } from './locations/locations.module';
 import { RegionsModule } from './regions/regions.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -27,7 +28,8 @@ import { RegionsModule } from './regions/regions.module';
   ProvidersModule,
   ManagersModule,
   LocationsModule,
-  RegionsModule
+  RegionsModule,
+  AuthModule
 ],
   controllers: [AppController],
   providers: [AppService],
