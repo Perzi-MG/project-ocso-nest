@@ -14,5 +14,4 @@ export class CreateRegionDto extends Region{
     })
     @IsArray()
     declare regionState: string[];
-
 }
