@@ -26,7 +26,7 @@ export class CreateManagerDto{
     @MaxLength(16)
     managerSalary: number;
     @ApiPropertyOptional()
-    @IsObject()
+    @IsNumber()
     @IsOptional()
     location: Location
 }
