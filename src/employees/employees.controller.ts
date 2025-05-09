@@ -8,12 +8,13 @@ import { ROLES } from 'src/auth/constants/roles.constants';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Employee } from './entities/employee.entity';
 import { ApiAuth } from 'src/auth/Decorators/api.decorator';
+import { AwsService } from 'src/aws/aws.service';
 
 @ApiAuth()
 @ApiTags('Employees')
 @Controller('employees')
 export class EmployeesController {
-  constructor(private readonly employeesService: EmployeesService) {}
+  constructor(private readonly employeesService: EmployeesService, private readonly awsService: AwsService) {}
 
   @Auth(ROLES.MANAGER, ROLES.ADMIN)
   @ApiResponse({
@@ -35,7 +36,7 @@ export class EmployeesController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadPhoto(@UploadedFile() file: Express.Multer.File){
-    return 'Ok';
+    return this.awsService.uploadFile(file);
   }
 
 
