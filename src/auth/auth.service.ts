@@ -75,9 +75,12 @@ export class AuthService {
     return token
   }
 
-  async updateUser(userEmail: string, updateUserDto: UpdateUserDto) {
+  async updateUser(id: string, updateUserDto: UpdateUserDto) {
+    if (updateUserDto.userPassword) {
+      updateUserDto.userPassword = bcrypt.hashSync(updateUserDto.userPassword, 5);
+    }
     const newUserData = await this.userRepository.preload({
-      userEmail,
+      userId: id,
       ...updateUserDto
     })
     if (!newUserData) throw new NotFoundException()
