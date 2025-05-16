@@ -12,12 +12,15 @@ export class AwsService {
     })
     async uploadFile(file: Express.Multer.File){
         const key = file.originalname
+        const url = `https://bucket-taller-ocso.s3.us-east-2.amazonaws.com/${key}`
         const bucket = "bucket-taller-ocso"
+        // https://bucket-taller-ocso.s3.us-east-2.amazonaws.com/foto_2.jpg
         const command = new PutObjectCommand({
             Key: key,
             Body: file.buffer,
             Bucket: bucket
         })
-        return await this.s3.send(command);
+        await this.s3.send(command);
+        return url
     }
 }
